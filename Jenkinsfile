@@ -4,11 +4,11 @@ def version = ""
 def serviceName = "spring"
 def groupName = "spring"
 def skipBuild = false
-def ciGroup = "csit"
+def ciGroup = "dev"
 def qaGroup = "staging"
 def scanPaths = ["circuit-ansible-1"]
-def devRegistry = "devaxregistry.azurecr.io"
-def prodRegistry = "prodaxregistry.azurecr.io"
+def devRegistry = "raj11646"
+def prodRegistry = "rajmca10"
 def buildServiceUrl = "https://5yfganz8bb.execute-api.us-east-1.amazonaws.com/prod/service/admin-cli/builds"
 
 pipeline {
