@@ -20,7 +20,7 @@ pipeline {
         AWS_SECRET_KEY = credentials('AWS_SECRET_KEY')
       }
       steps {
-        git(url: )
+        git(url: 'https://github.com/raj11646/spring-boot-demo.git' )
         script {
           def dateFormat = new SimpleDateFormat("yyyyMMdd")
           def date = new Date()
