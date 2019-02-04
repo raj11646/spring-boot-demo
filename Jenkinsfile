@@ -41,24 +41,24 @@ pipeline {
             registry = "rajmca10"
           }
         }
-        //script {
-          //try {
-            //def lastTagName = sh (
-              //script: "curl -H 'x-api-key: ${AWS_SECRET_KEY}' ${buildServiceUrl}/${BRANCH_NAME}",
-              //returnStdout: true
-            //)
-            //def lastBuildTag = lastTagName.replace("\"", "")
-            //scanPaths.each {
-              //echo "Checking for change in ${it}"
-              //sh "git diff --quiet --exit-code ${lastBuildTag}..HEAD ${it}"
-            //}
-            //echo "No change in ${serviceName}"
-            //skipBuild = true
-          //} catch (err) {
-            //echo "No previous build for this commit exists: ${err}"
-            //skipBuild = false
-          //}
-        //}
+        script {
+          try {
+            def lastTagName = sh (
+              script: "curl -H 'x-api-key: ${AWS_SECRET_KEY}' ${buildServiceUrl}/${BRANCH_NAME}",
+              returnStdout: true
+            )
+            def lastBuildTag = lastTagName.replace("\"", "")
+            scanPaths.each {
+              echo "Checking for change in ${it}"
+              sh "git diff --quiet --exit-code ${lastBuildTag}..HEAD ${it}"
+            }
+            echo "No change in ${serviceName}"
+            skipBuild = true
+          } catch (err) {
+            echo "No previous build for this commit exists: ${err}"
+            skipBuild = false
+          }
+        }
       }
     }
 
