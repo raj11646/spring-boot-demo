@@ -2,7 +2,7 @@
 import java.text.SimpleDateFormat
 def version = ""
 def serviceName = "adapter"
-def serviceDirectory = "adapter"
+//def serviceDirectory = "adapter"
 def skipBuild = false
 def deployCI = false
 def deployQA = false
@@ -79,9 +79,8 @@ pipeline {
           steps {
             echo "Build"
             echo "Build Number ${version}"
-            dir(serviceDirectory) {
               sh "../gradlew buildNeeded -PprojVersion=${version} --profile -x test"
-            }
+            
           }
         }
 
