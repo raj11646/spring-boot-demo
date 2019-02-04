@@ -7,12 +7,12 @@ def skipBuild = false
 def deployCI = false
 def deployQA = false
 def deployProd = false
-def scanPaths = ["adapter", "cmsdal", "oo-commons"]
+//def scanPaths = ["adapter", "cmsdal", "oo-commons"]
 def registry = ""
-def ciGroup = "csit"
+def ciGroup = "dev"
 def qaGroup = "staging"
 def prodGroup = "prod"
-def buildServiceUrl = "https://5yfganz8bb.execute-api.us-east-1.amazonaws.com/prod/service/${serviceName}/builds"
+//def buildServiceUrl = "https://5yfganz8bb.execute-api.us-east-1.amazonaws.com/prod/service/${serviceName}/builds"
 
 pipeline {
   agent none
@@ -32,13 +32,13 @@ pipeline {
           if (branchName == "master") {
             deployCI = true
             version = VersionNumber (versionNumberString: '${BUILDS_TODAY}', versionPrefix: "${serviceName}-b${format}.")
-            registry = "devaxregistry.azurecr.io"
+            registry = "raj11646"
           } else {
             deployQA = true
             deployProd = true
             def branchBuildNumber = branchInfo.last()
             version = VersionNumber (versionNumberString: '${BUILD_NUMBER}', versionPrefix: "${serviceName}-${branchBuildNumber}.")
-            registry = "prodaxregistry.azurecr.io"
+            registry = "rajmca10"
           }
         }
         script {
@@ -276,7 +276,7 @@ pipeline {
       steps {
         echo "Deploy to Production - ${version}"
         sh 'rm -rf prana-services'
-        sh 'git clone cicd@code.appranix.net:prana/prana-services.git'
+        sh ''
         script {
           dir ('prana-services/k8s-yaml/adapter') {
             echo "Deploy using ax-cli."
